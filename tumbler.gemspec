@@ -22,13 +22,13 @@ Gem::Specification.new do |s|
     Gemfile
     README.md
     Rakefile
-    lib/tumblr2.rb
-    lib/tumblr2/blog.rb
-    lib/tumblr2/client.rb
+    lib/tumbler.rb
+    lib/tumbler/blog.rb
+    lib/tumbler/client.rb
     spec/blog_spec.rb
     spec/client_spec.rb
     spec/spec_helper.rb
-    tumblr2.gemspec
+    tumbler.gemspec
   ]
   # = MANIFEST =
 
