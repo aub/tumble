@@ -43,7 +43,6 @@ module Tumble
     def faraday_connection
       options = {
         :url => base_url,
-        :params => { :oauth_token => @token },
         :headers => {
           :accept =>  'application/json',
           :user_agent => 'tumble'
@@ -51,6 +50,7 @@ module Tumble
       }
       @faraday_connection ||= Faraday::Connection.new(options) do |builder|
         builder.use Faraday::Request::UrlEncoded
+        builder.use Faraday::Request::Multipart
         builder.use FaradayMiddleware::Mashify
         builder.use FaradayMiddleware::ParseJson
         builder.use Tumble::Request::TumblrOAuth, credentials
