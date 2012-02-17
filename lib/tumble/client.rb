@@ -7,29 +7,27 @@ module Tumble
     # Initialize a client to use for making requests
     #
     # @param [String] oauth_token
-    # @param [Hash] options
-    # @option options Hash   :ssl Additional SSL options (like the path to certificate file)
-    def initialize(oauth_token, options={})
-      @oauth_token = options[:oauth_token]
-      @ssl = options[:ssl].nil? ? Hash.new : options[:ssl]
-    end
-    
-    def ssl
-      @ssl
+    # @param [String] oauth_secret
+    def initialize(access_token, access_secret)
+      @access_token = access_token
+      @access_secret = access_secret
     end
     
     def connection
       options = {
         :url => api_url,
-        :ssl => @ssl,
         :params => { :oauth_token => @oauth_token },
-        :headers => default_headers
+        :headers => {
+          :accept =>  'application/json',
+          :user_agent => 'tumble'
+        }
       }
       @connection ||= Faraday::Connection.new(options) do |builder|
         builder.use Faraday::Request::Multipart
         builder.use Faraday::Request::UrlEncoded
         builder.use FaradayMiddleware::Mashify
         builder.use FaradayMiddleware::ParseJson
+        builder.use Tumble::Request::TumblrOAuth, credentials
         builder.adapter Faraday.default_adapter
       end
     end
@@ -42,13 +40,17 @@ module Tumble
       Blog.new(self, blog_name)
     end
 
-    private
-
-    def default_headers
-      headers = {
-        :accept =>  'application/json',
-        :user_agent => 'tumble'
+    def credentials
+      {
+        :consumer_key => Config.consumer_key,
+        :consumer_secret => Config.consumer_secret,
+        :token => @access_token,
+        :token_secret => @access_secret,
       }
+    end
+
+    def user_info
+      @connection.post('http://api.tumblr.com/v2/user/info')
     end
   end
 end
