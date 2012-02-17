@@ -1,11 +1,11 @@
-%w(blog client config request/oauth).each do |file|
+%w(blog client config connection request/oauth).each do |file|
   require File.join(File.dirname(__FILE__), 'tumble', file)
 end
 
 module Tumble
-  VERSION = '0.0.3'
+  VERSION = '0.0.4'
 
-  def self.config
+  def self.configure
     yield Config
     Config
   end
