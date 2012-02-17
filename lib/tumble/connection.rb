@@ -46,7 +46,8 @@ module Tumble
         :headers => {
           :accept =>  'application/json',
           :user_agent => 'tumble'
-        }
+        },
+        :params => { :api_key => credentials[:consumer_key] }
       }
       @faraday_connection ||= Faraday::Connection.new(options) do |builder|
         builder.use Faraday::Request::UrlEncoded

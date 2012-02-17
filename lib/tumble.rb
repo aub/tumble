@@ -3,7 +3,7 @@
 end
 
 module Tumble
-  VERSION = '0.0.6'
+  VERSION = '0.0.7'
 
   def self.configure
     yield Config
