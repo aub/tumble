@@ -4,7 +4,6 @@ module Tumble
     def initialize(token, secret)
       @token = token
       @secret = secret
-      @faraday_connection = faraday_connection
     end
 
     def base_url
@@ -29,7 +28,7 @@ module Tumble
 
     def request(method, path, params)
       path = "/v2#{path}" unless path =~ /^\/v2/
-      response = @faraday_connection.send(method) do |request|
+      response = faraday_connection.send(method) do |request|
         case method
         when :delete, :get
           request.url(path, params)
@@ -50,8 +49,7 @@ module Tumble
           :user_agent => 'tumble'
         }
       }
-      Faraday::Connection.new(options) do |builder|
-        builder.use Faraday::Request::Multipart
+      @faraday_connection ||= Faraday::Connection.new(options) do |builder|
         builder.use Faraday::Request::UrlEncoded
         builder.use FaradayMiddleware::Mashify
         builder.use FaradayMiddleware::ParseJson

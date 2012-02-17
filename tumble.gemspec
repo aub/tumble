@@ -3,7 +3,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 1.3.5") if s.respond_to? :required_rubygems_version=
 
   s.name    = 'tumble'
-  s.version = '0.0.3'
+  s.version = '0.0.4'
 
   s.summary     = 'Library for accessing the Tumblr api v2'
   # TODO: s.description
@@ -26,10 +26,12 @@ Gem::Specification.new do |s|
     lib/tumble/blog.rb
     lib/tumble/client.rb
     lib/tumble/config.rb
+    lib/tumble/connection.rb
     lib/tumble/request/oauth.rb
     spec/blog_spec.rb
     spec/client_spec.rb
     spec/config_spec.rb
+    spec/connection_spec.rb
     spec/oauth_spec.rb
     spec/spec_helper.rb
     tumble.gemspec
