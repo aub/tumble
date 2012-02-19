@@ -13,7 +13,7 @@ module Tumble
     # @see http://www.tumblr.com/docs/en/api/v2#blog-info
     # @requires_authentication Yes
     def info
-      @connection.get("/blog/#{name}/info")
+      @connection.get("/blog/#{name}/info").response
     end
 
     # You can get a blog's avatar in 9 different sizes. The default size is 64x64.
@@ -24,7 +24,7 @@ module Tumble
     # @param options [Hash] A customizable set of options.
     # @option options [Integer] :size The size of the avatar. Must be in 16, 24, 30, 40, 48, 64, 96, 128, or 512
     def avatar(options={})
-      @connection.get("/blog/#{name}/avatar", options)
+      @connection.get("/blog/#{name}/avatar", options).response
     end
 
     # Retrieve a Blog's Followers
@@ -36,7 +36,7 @@ module Tumble
     # @option options [Integer] :limit The number of results to return: 1–20, inclusive
     # @option options [Integer] :offset Result to start at
     def followers(options={})
-      @connection.get("/blog/#{name}/followers", options)
+      @connection.get("/blog/#{name}/followers", options).response
     end
 
     # Retrieve Published Posts
@@ -54,7 +54,7 @@ module Tumble
     # @option options [Boolean] :notes_info Indicates whether to return notes information (specify true or false). Returns note count and note metadata.
     # @option options [String] :format Specifies the post format to return, other than HTML. Must be either text or raw.
     def posts(options={})
-      @connection.get("/blog/#{name}/posts", options)
+      @connection.get("/blog/#{name}/posts", options).response
     end
 
     # Retrieve Queued Posts
@@ -62,7 +62,7 @@ module Tumble
     # @see http://www.tumblr.com/docs/en/api/v2#blog-queue
     # @requires_authentication Yes
     def queue
-      @connection.get("/blog/#{name}/posts/queue")
+      @connection.get("/blog/#{name}/posts/queue").response
     end
 
     # Retreive Draft Posts
@@ -70,7 +70,7 @@ module Tumble
     # @see http://www.tumblr.com/docs/en/api/v2#blog-drafts
     # @requires_authentication Yes
     def drafts
-      @connection.get("/blog/#{name}/posts/draft")
+      @connection.get("/blog/#{name}/posts/draft").response
     end
 
     # Retreive Submission Posts
@@ -78,7 +78,7 @@ module Tumble
     # @see http://www.tumblr.com/docs/en/api/v2#blog-submissions
     # @requires_authentication Yes
     def submissions
-      @connection.get("/blog/#{name}/posts/submission")
+      @connection.get("/blog/#{name}/posts/submission").response
     end
 
     # Create a New Blog Post
@@ -121,7 +121,7 @@ module Tumble
     # @option options [String] :embed HTML embed code for the video
     # @option options [String] :data A video file
     def create_post(options={})
-      @connection.post("/blog/#{name}/post", options)
+      @connection.post("/blog/#{name}/post", options).response
     end
 
     # Edit a Blog Post
@@ -166,7 +166,7 @@ module Tumble
     # @option options [String] :data A video file
 
     def edit_post(id, options={})
-      @connection.post("/blog/#{name}/post/edit", options.merge('id' => id))
+      @connection.post("/blog/#{name}/post/edit", options.merge('id' => id)).response
     end
 
     # Reblog a Post
@@ -179,7 +179,7 @@ module Tumble
     # @param options [Hash] A customizable set of options
     # @option options [String] :comment A comment added to the reblogged post
     def reblog_post(id, reblog_key, options={})
-      @connection.post("/blog/#{name}/post/reblog", options.merge('id' => id, 'reblog_key' => reblog_key))
+      @connection.post("/blog/#{name}/post/reblog", options.merge('id' => id, 'reblog_key' => reblog_key)).response
     end
 
     # Delete a Post
@@ -189,7 +189,7 @@ module Tumble
     #
     # @param id [Integer] The ID of the post to delete
     def delete_post(id)
-      @connection.post("/blog/#{name}/post/delete", :id => id)
+      @connection.post("/blog/#{name}/post/delete", :id => id).response
     end
   end
 end
