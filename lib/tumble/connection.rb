@@ -50,11 +50,11 @@ module Tumble
         :params => { :api_key => credentials[:consumer_key] }
       }
       @faraday_connection ||= Faraday::Connection.new(options) do |builder|
+        builder.use Tumble::Request::TumblrOAuth, credentials
         builder.use Faraday::Request::UrlEncoded
         builder.use Faraday::Request::Multipart
         builder.use FaradayMiddleware::Mashify
         builder.use FaradayMiddleware::ParseJson
-        builder.use Tumble::Request::TumblrOAuth, credentials
         builder.adapter Faraday.default_adapter
       end
     end

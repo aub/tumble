@@ -87,7 +87,7 @@ module Tumble
     # @requires_authentication Yes
     #
     # @param options [Hash] A customizable set of options
-    # @option options [String] :type The type of post to create. Specify one of the following:  text, photo, quote, link, chat, audio, video
+    # @option options [String, required] :type The type of post to create. Specify one of the following:  text, photo, quote, link, chat, audio, video
     # @option options [String] :state The state of the post. Specify one of the following:  published, draft, queue
     # @option options [String] :tags Comma-separated tags for this post
     # @option options [String] :tweet Manages the autotweet (if enabled) for this post: set to off for no tweet, or enter text to override the default tweet
@@ -96,30 +96,30 @@ module Tumble
     # @option options [String] :slug Add a short text summary to the end of the post URL
     # For text posts:
     # @option options [String] :title The optional title of the post, HTML entities must be escaped
-    # @option options [String] :body The full post body, HTML allowed
+    # @option options [String, required] :body The full post body, HTML allowed
     # For photo posts:
     # @option options [String] :caption The user-supplied caption, HTML allowed
     # @option options [String] :link The "click-through URL" for the photo
-    # @option options [String] :source The photo source URL
-    # @option options [Array] :data One or more image files (submit multiple times to create a slide show)
+    # @option options [String, required] :source The photo source URL
+    # @option options [Array, required] :data One or more image files (submit multiple times to create a slide show)
     # For quote posts:
-    # @option options [String] :quote The full text of the quote, HTML entities must be escaped
+    # @option options [String, required] :quote The full text of the quote, HTML entities must be escaped
     # @option options [String] :source Cited source, HTML allowed
     # For link posts:
     # @option options [String] :title The title of the page the link points to, HTML entities should be escaped
-    # @option options [String] :url The link
+    # @option options [String, required] :url The link
     # @option options [String] :description A user-supplied description, HTML allowed
     # For chat posts:
     # @option options [String] :title The title of the chat
-    # @option options [String] :conversation The text of the conversation/chat, with dialogue labels (no HTML)
+    # @option options [String, required] :conversation The text of the conversation/chat, with dialogue labels (no HTML)
     # For audio posts:
     # @option options [String] :caption The user-supplied caption
-    # @option options [String] :external_url The URL of the site that hosts the audio file (not tumblr)
-    # @option options [String] :data An audio file
+    # @option options [String, required] :external_url The URL of the site that hosts the audio file (not tumblr)
+    # @option options [String, required] :data An audio file
     # For video posts:
     # @option options [String] :caption The user-supplied caption
-    # @option options [String] :embed HTML embed code for the video
-    # @option options [String] :data A video file
+    # @option options [String, required] :embed HTML embed code for the video
+    # @option options [String, required] :data A video file
     def create_post(options={})
       @connection.post("/blog/#{name}/post", options).response
     end
