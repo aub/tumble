@@ -13,6 +13,7 @@ Gem::Specification.new do |s|
   s.homepage = 'https://github.com/aub/tumble'
 
   s.add_dependency 'faraday'
+  s.add_dependency 'faraday_middleware'
   s.add_development_dependency 'rake'
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'webmock'
